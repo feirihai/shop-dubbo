@@ -1,0 +1,52 @@
+# Spring boot application
+spring:
+  application:
+    name: dubbo-app-provider
+  datasource:
+    druid:
+      url: jdbc:mysql://localhost:3306/myshop?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+      username: root
+      password: root
+      initial-size: 1
+      min-idle: 1
+      max-active: 20
+      test-on-borrow: true
+      driver-class-name: com.mysql.jdbc.Driver
+      db-type: com.alibaba.druid.pool.DruidDataSource
+server:
+  port: 8502
+
+# MyBatis Config properties
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+
+
+# Services Versions
+services:
+  versions:
+    content:
+      v1: 1.0.0
+
+# Dubbo Config properties
+dubbo:
+  ## Base packages to scan Dubbo Component£º@com.alibaba.dubbo.config.annotation.Service
+  scan:
+    basePackages: com.dubbo.app
+  ## ApplicationConfig Bean
+  application:
+    id: dubbo-app-provider
+    name: dubbo-app-provider
+    qos-port: 22223
+    qos-enable: true
+  ## ProtocolConfig Bean
+  protocol:
+    id: dubbo
+    name: dubbo
+    port: 20882
+    status: server
+    serialization: kryo
+  ## RegistryConfig Bean
+  registry:
+    id: zookeeper
+    address: zookeeper://127.0.0.1:2181
+

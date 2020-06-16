@@ -1,0 +1,56 @@
+# Spring boot application
+spring:
+  application:
+    name: dubbo-app-consumer
+  thymeleaf:
+    enabled: true
+    encoding: utf-8
+    prefix: classpath:/templates/
+    cache: false
+    mode: HTML
+    suffix: .html
+  datasource:
+    druid:
+      url: jdbc:mysql://localhost:3306/myshop?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+      username: root
+      password: root
+      initial-size: 1
+      min-idle: 1
+      max-active: 20
+      test-on-borrow: true
+      driver-class-name: com.mysql.jdbc.Driver
+      db-type: com.alibaba.druid.pool.DruidDataSource
+server:
+  port: 8602
+
+# Services Versions
+services:
+  versions:
+    user:
+      v1: 1.0.0
+
+# Dubbo Config properties
+dubbo:
+  scan:
+    basePackages: com.shop.dubbo.api
+  ## ApplicationConfig Bean
+  application:
+    id: dubbo-app-consumer
+    name: dubbo-app-consumer
+  ## ProtocolConfig Bean
+  protocol:
+    id: dubbo
+    name: dubbo
+    port: 30882
+    status: server
+    serialization: kryo
+  ## RegistryConfig Bean
+  registry:
+    id: zookeeper
+    address: zookeeper://127.0.0.1:2181
+
+# Dubbo Endpoint (default status is disable)
+endpoints:
+  dubbo:
+    enabled: true
+

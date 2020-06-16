@@ -1,0 +1,48 @@
+spring:
+  application:
+    name: myshop-web-admin
+  thymeleaf:
+    enabled: true
+    encoding: utf-8
+    prefix: classpath:/templates/
+    cache: false
+    mode: HTML
+    suffix: .html
+  datasource:
+    druid:
+      url: jdbc:mysql://localhost:3306/myshop?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+      username: root
+      password: root
+      initial-size: 1
+      min-idle: 1
+      max-active: 20
+      test-on-borrow: true
+      driver-class-name: com.mysql.jdbc.Driver
+      db-type: com.alibaba.druid.pool.DruidDataSource
+
+server:
+  port: 9000
+
+# Dubbo Config properties
+dubbo:
+  scan:
+    basePackages: com.shop.dubbo.controller
+  ## ApplicationConfig Bean
+  application:
+    id: myshop-web-admin
+    name: myshop-web-admin
+  ## ProtocolConfig Bean
+  protocol:
+    id: dubbo
+    name: dubbo
+    serialization: kryo
+  ## RegistryConfig Bean
+  registry:
+    id: zookeeper
+    address: zookeeper://127.0.0.1:2181
+
+# Dubbo Endpoint (default status is disable)
+endpoints:
+  dubbo:
+    enabled: true
+
